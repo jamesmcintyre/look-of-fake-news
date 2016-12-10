@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { StyleRoot } from 'radium';
 import Infinite from 'react-infinite';
-import Screenshot from './Screenshot';
-// import Landing from './Landing';
+import Screenshot from '../screenshot/Screenshot';
+import Landing from '../landing/Landing';
 
-import sources from '../data/sources.json';
-import '../styles/App.css';
+import sources from '../../data/sources.json';
+import styles from './app-styles';
 
 class App extends Component {
 
@@ -60,34 +61,55 @@ class App extends Component {
 
   prefetchImages(index) {
     const prefetchSources = this.state.shuffledSources.slice(index, index + 5);
-    // eslint-disable-next-line
-    let imageCache = prefetchSources.map((source) => {
+    let imageCache = prefetchSources.map((source) => { // eslint-disable-line
       const cacheImg = new Image();
       cacheImg.src = `/images/${source.fileName}`;
       return cacheImg;
     });
   }
 
-  render() {
+  renderLanding() {
+
+    const { width, height } = this.state;
+    const style = { width, height };
+
     return (
-      <div className="App">
-        <Infinite
-          useWindowAsScrollContainer
-          elementHeight={this.state.screenShotHeight}
-        >
-          {this.state.shuffledSources.map((source, i) => {
-            return (
-              <Screenshot
-                key={i}
-                preloadImages={() => this.prefetchImages(i)}
-                style={this.screenshotStyle(source)}
-                source={source.source}
-                >
-              </Screenshot>
-            )
-          })}
-        </Infinite>
-      </div>
+      <Landing key={'landing'} style={style}/>
+    )
+  }
+
+  renderList() {
+    return this.state.shuffledSources.map((source, i) => {
+      return (
+        <Screenshot
+          key={i}
+          preloadImages={() => this.prefetchImages(i)}
+          style={this.screenshotStyle(source)}
+          source={source.source}
+          >
+        </Screenshot>
+      )
+    });
+  }
+
+  render() {
+    const {
+      height,
+      screenShotHeight,
+      shuffledSources
+    } = this.state;
+
+    return (
+      <StyleRoot>
+        <div style={styles} className="App">
+          <Infinite
+            useWindowAsScrollContainer
+            elementHeight={[height].concat(shuffledSources.map(() => screenShotHeight))}
+            >
+            {[this.renderLanding()].concat(this.renderList())}
+          </Infinite>
+        </div>
+      </StyleRoot>
     );
   }
 }
