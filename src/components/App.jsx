@@ -81,6 +81,7 @@ class App extends Component {
                 key={i}
                 preloadImages={() => this.prefetchImages(i)}
                 style={this.screenshotStyle(source)}
+                source={source.source}
                 >
               </Screenshot>
             )

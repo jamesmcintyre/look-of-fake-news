@@ -8,6 +8,7 @@ export default (props) => {
     <div
       className={'screenshot'}
       style={props.style}
+      onClick={() => window.open(`http://${props.source}`)}
       >
     </div>
   )
