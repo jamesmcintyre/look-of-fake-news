@@ -23,7 +23,7 @@ const Landing = (props) => {
     const map = {
       wiki: 'https://en.wikipedia.org/wiki/Fake_news_website',
       bs: 'http://bsdetector.tech/',
-      li: 'https://github.com/bs-detector/bs-detector/blob/dev/ext/data/data.json'
+      li: 'https://github.com/jamesmcintyre/look-of-fake-news/blob/master/src/data/sources.json'
     };
     return () => window.open(map[key]);
   };
