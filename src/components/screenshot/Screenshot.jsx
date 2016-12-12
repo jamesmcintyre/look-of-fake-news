@@ -7,7 +7,7 @@ const Screenshot = (props) => {
 
   props.preloadImages();
 
-  const style = Object.assign(props.style, styles)
+  const style = Object.assign(props.style, styles);
 
   return (
     <div

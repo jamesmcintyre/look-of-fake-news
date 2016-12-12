@@ -3,24 +3,29 @@ import base from '../../styles-library/base';
 const LandingStyles = {
   color: '#545454',
   backgroundColor: `#e4e4e4`,
-  paddingTop: '10vh',
+  overflow: 'auto',
+  display: 'inline-block',
   main: {
-    fontSize: '3vmax',
+    fontSize: '1.3rem',
     fontWeight: '200',
     width: '40%',
     backgroundColor: 'white',
-    paddingLeft: '15px',
-    paddingTop: '.7vmax',
-    paddingBottom: '.7vmax'
+    paddingLeft: '36px',
+    paddingTop: '9px',
+    paddingBottom: '9px',
+    marginTop: '2.5rem'
   },
   message: {
-    marginTop: '2vmax'
   },
   share: {
     textAlign: 'center',
+    position: 'absolute',
+    bottom: '0',
+    width: '100%',
+    maxWidth: '960px',
     color: 'white',
     cursor: 'pointer',
-    paddingTop: '3vh',
+    paddingBottom: '2.5rem',
     button: {
       marginLeft: 'auto',
       marginRight: 'auto',

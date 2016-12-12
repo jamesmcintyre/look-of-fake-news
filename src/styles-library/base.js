@@ -7,8 +7,12 @@ export default {
   },
   p: {
     margin: '0',
-    padding: '15px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
+    paddingBottom: '36px',
     wordWrap: 'break-word',
-    fontWeight: '300'
+    fontWeight: '300',
+    textAlign: 'justify',
+    paddingTop: '42px'
   }
 };

@@ -12,14 +12,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.getWindowDimensions = this.getWindowDimensions.bind(this);
+    this.shuffleSources = this.shuffleSources.bind(this);
   }
 
   componentWillMount() {
     this.getWindowDimensions();
-    const shuffledSources = this.shuffleSources(sources);
-    this.setState({
-      shuffledSources
-    });
+    this.shuffleSources(sources);
   }
 
   componentDidMount() {
@@ -38,8 +36,12 @@ class App extends Component {
     height = w.innerHeight || documentElement.clientHeight || body.clientHeight,
     listContainerWidth = width <= 960 ? width : 960,
     screenShotHeight = listContainerWidth * 1.571667;
-
     this.setState({width, screenShotHeight, height});
+  }
+
+  updateYOffset() {
+    const showScrollUp = window.pageYOffset > 3000;
+    this.setState({ showScrollUp });
   }
 
   screenshotStyle(source) {
@@ -57,7 +59,9 @@ class App extends Component {
         sources[i] = sources[j];
         sources[j] = temp;
     }
-    return sources;
+    this.setState({
+      shuffledSources: sources
+    });;
   }
 
   prefetchImages(index) {
@@ -70,10 +74,10 @@ class App extends Component {
   }
 
   renderLanding() {
-
     const { listContainerWidth, height } = this.state;
     const style = {
       width: listContainerWidth,
+      actualHeight: height,
       height
     };
 
@@ -96,26 +100,31 @@ class App extends Component {
     });
   }
 
-
-
   render() {
     const {
       height,
       screenShotHeight,
-      shuffledSources
+      shuffledSources,
+      showScrollUp
     } = this.state;
-    const style = Object.assign(styles, { width: '100%', maxWidth: '960px'})
+    const style = Object.assign(styles.app, { width: '100%', maxWidth: '960px'})
 
     return (
       <StyleRoot>
-        <div style={style} className="App">
+        <div style={style}>
           <Infinite
             containerHeight={height}
             elementHeight={[height].concat(shuffledSources.map(() => screenShotHeight))}
+            handleScroll={() => this.updateYOffset()}
             useWindowAsScrollContainer
             >
             {[this.renderLanding()].concat(this.renderList())}
           </Infinite>
+        </div>
+        <div style={styles.scrollUp}>
+          { showScrollUp && <div style={styles.scrollButton} onClick={() => window.scrollTo(0,0)}>
+              Back to Top
+            </div>}
         </div>
       </StyleRoot>
     );

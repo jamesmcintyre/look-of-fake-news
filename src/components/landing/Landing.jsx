@@ -6,12 +6,18 @@ import styles from './landing-styles';
 
 const Landing = (props) => {
 
-  const style = Object.assign(props.style, styles);
+  let style = Object.assign(props.style, styles);
+  style.height = window.landingHeight || style.height;
 
-  const {
+  let {
     main, block, bold,
     message, p, share
   } = style;
+
+  if(style.actualHeight > 850) {
+    main.marginTop = '16.5rem';
+    share.paddingBottom = '5.5rem';
+  }
 
   const open = (key) => {
     const map = {
@@ -26,10 +32,9 @@ const Landing = (props) => {
     <div style={style}>
       <div style={main}>
         <span style={block}>the look of</span>
-        <span style={{...block, ...bold, marginTop: '-.4vmax' }}>fake news</span>
+        <span style={{...block, ...bold, marginTop: '-3px' }}>fake news</span>
       </div>
       <div style={message}>
-        <p style={message.heading}> </p>
         <p style={p}>Fake news is disinformation or propaganda disguised to look and
           feel like real news. Below you’ll find screenshots of
           <a href={'#'} onClick={open('li')}>~700 web sites</a> which are known to
