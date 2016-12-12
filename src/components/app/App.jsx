@@ -36,7 +36,8 @@ class App extends Component {
     body = d.getElementsByTagName('body')[0],
     width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
     height = w.innerHeight || documentElement.clientHeight || body.clientHeight,
-    screenShotHeight = width * 1.571667;
+    listContainerWidth = width <= 960 ? width : 960,
+    screenShotHeight = listContainerWidth * 1.571667;
 
     this.setState({width, screenShotHeight, height});
   }
@@ -44,7 +45,7 @@ class App extends Component {
   screenshotStyle(source) {
     return {
       height: this.state.screenShotHeight,
-      width: this.state.width,
+      width: this.state.listContainerWidth,
       backgroundImage: `url("/images/${source.fileName}")`
     };
   }
@@ -70,8 +71,11 @@ class App extends Component {
 
   renderLanding() {
 
-    const { width, height } = this.state;
-    const style = { width, height };
+    const { listContainerWidth, height } = this.state;
+    const style = {
+      width: listContainerWidth,
+      height
+    };
 
     return (
       <Landing key={'landing'} style={style}/>
@@ -92,19 +96,23 @@ class App extends Component {
     });
   }
 
+
+
   render() {
     const {
       height,
       screenShotHeight,
       shuffledSources
     } = this.state;
+    const style = Object.assign(styles, { width: '100%', maxWidth: '960px'})
 
     return (
       <StyleRoot>
-        <div style={styles} className="App">
+        <div style={style} className="App">
           <Infinite
-            useWindowAsScrollContainer
+            containerHeight={height}
             elementHeight={[height].concat(shuffledSources.map(() => screenShotHeight))}
+            useWindowAsScrollContainer
             >
             {[this.renderLanding()].concat(this.renderList())}
           </Infinite>

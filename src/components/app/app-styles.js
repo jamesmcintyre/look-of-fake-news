@@ -1,4 +1,6 @@
 export default {
-  fontFamily: `'Roboto Slab', serif`,
-  backgroundColor: `rgb(66, 66, 66)`
+  fontFamily: `'Nunito Sans', sans-serif`,
+  backgroundColor: `rgb(66, 66, 66)`,
+  marginLeft: 'auto',
+  marginRight: 'auto'
 };
