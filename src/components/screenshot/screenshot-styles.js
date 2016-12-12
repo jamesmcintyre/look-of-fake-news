@@ -11,6 +11,5 @@ export default {
   backgroundSize: 'cover',
   animationName: fadeInKeyFrames,
   animationDuration: '1s',
-  animationTimingFunction: 'ease-in',
-  // marginBottom: '10vh'
+  animationTimingFunction: 'ease-in'
 };

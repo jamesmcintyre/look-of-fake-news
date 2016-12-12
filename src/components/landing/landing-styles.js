@@ -34,7 +34,7 @@ const LandingStyles = {
     icon: {
       width: '16px',
       height: '16px',
-      backgroundImage: `url('/facebook-logo.svg')`,
+      backgroundImage: `url('facebook-logo.svg')`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       display: 'inline-block',

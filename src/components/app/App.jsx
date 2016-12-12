@@ -46,7 +46,7 @@ class App extends Component {
     return {
       height: this.state.screenShotHeight,
       width: this.state.listContainerWidth,
-      backgroundImage: `url("/images/${source.fileName}")`
+      backgroundImage: `url("images/${source.fileName}")`
     };
   }
 
@@ -64,7 +64,7 @@ class App extends Component {
     const prefetchSources = this.state.shuffledSources.slice(index, index + 5);
     let imageCache = prefetchSources.map((source) => { // eslint-disable-line
       const cacheImg = new Image();
-      cacheImg.src = `/images/${source.fileName}`;
+      cacheImg.src = `images/${source.fileName}`;
       return cacheImg;
     });
   }
